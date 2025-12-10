@@ -1,0 +1,20 @@
+services:
+  mcp-reporter:
+    build: .
+    container_name: mcp_demo
+    # Expose Streamlit port
+    ports:
+      - "8501:8501"
+    # Mount a volume so the user can see the generated sqlite file if they want
+    volumes:
+      - ./data:/app/data
+    environment:
+      # Tell our app where Ollama lives (On the host machine)
+      - OLLAMA_HOST=http://host.docker.internal:11434
+    # The command does two things:
+    # 1. Runs the seeder to create the DB (if not exists)
+    # 2. Starts the Streamlit UI
+    command: >
+      sh -c "python seed_data.py && streamlit run app.py"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

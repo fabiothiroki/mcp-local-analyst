@@ -34,7 +34,9 @@ RULES:
 2. Output ONLY a JSON object with the tool call. Do not output chat text yet.
 3. The format must be: {{ "tool": "query_database", "sql": "SELECT..." }}
 4. Always convert cents to main currency units in your final answer, but use cents in SQL.
-5. For date queries, use SQLite syntax (e.g., date('now', '-1 day')).
+5. For date queries, use SQLite syntax: date('now', '-1 day'), date('now', '-30 days'), etc.
+6. Use only ASCII operators: >= (not ≥), <= (not ≤), = (not ==)
+7. Do NOT include any markdown, code blocks, or explanations. Only JSON.
 """
 
 # --- MCP Client Helper ---
@@ -182,10 +184,9 @@ if prompt := st.chat_input("Ex: How many failed payments in Germany yesterday?")
                 final_response = client.chat(
                     model=model_id,
                     messages=[
-                        {"role": "system", "content": SYSTEM_PROMPT},
+                        {"role": "system", "content": "You are a helpful Data Analyst. Format the database results clearly and answer the user's question in 1-2 sentences. No markdown, just plain text."},
                         {"role": "user", "content": prompt},
-                        {"role": "assistant", "content": llm_response_text},
-                        {"role": "user", "content": f"Here is the database result: {db_result}. Please answer my original question based on this data."}
+                        {"role": "user", "content": f"Database result: {db_result}"}
                     ]
                 )
                 final_answer = final_response['message']['content']

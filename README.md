@@ -20,11 +20,7 @@ Before running the application, make sure you have the following installed:
 
 ### Installation & Running Locally
 
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd mcp-local-analyst
-   ```
+1. Clone the repository
 
 2. Ensure Ollama is running:
    ```bash

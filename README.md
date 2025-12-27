@@ -3,6 +3,8 @@
 
 Talk to your data locally 💬📊. A private AI Data Analyst built with the Model Context Protocol (MCP), Ollama, and SQLite. Turn natural language into SQL queries without data leaving your machine. Includes a Dockerized Streamlit UI
 
+📝 **[Read the full article on Medium](https://medium.com/gitconnected/chat-with-your-database-for-free-build-a-private-ai-agent-in-python-87bc0245ca8f)**
+
 ## Getting Started
 
 ### Prerequisites
